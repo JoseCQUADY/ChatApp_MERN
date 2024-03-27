@@ -1,4 +1,4 @@
-# Pasos para correr: 
+# Pasos para correr el programa: 
 
 1- Clonarlo
 
