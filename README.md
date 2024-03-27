@@ -6,7 +6,9 @@
 
 3- Abrir el proyecto 
 
-4- Colocar el comando : npm install
+4- Colocar el comando : npm install express
+
+5- Coloar el comando : npm install 
 
 5- Correr el programa con npm run dev
 
