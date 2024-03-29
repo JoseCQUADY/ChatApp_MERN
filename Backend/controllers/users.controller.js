@@ -93,7 +93,6 @@ export const deleteUser = async (req, res) => {
     
         contact.contacts.splice(contactIndex, 1);
 
-
         // Remove all messages and conversations between the two users
 
         const conversation = await Conversation.findOne({
