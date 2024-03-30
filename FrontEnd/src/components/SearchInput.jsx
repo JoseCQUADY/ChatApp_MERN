@@ -1,8 +1,7 @@
-import React from 'react'
 
 const SearchInput = () => {
     return (
-        <div className='flex justify-center items-center my-2 h-14 w-full '>
+        <div className='flex justify-center items-center h-14 w-full my-2'>
             <form action="" className=''>
                 <input type="text" placeholder="Search" className="input input-bordered rounded-full text-white" />
                 <button type='submit' className='btn btn-circle border-cyan-500 hover:border-cyan-500 hover:bg-sky-700 bg-sky-500 texg-white mx-2'>
@@ -10,8 +9,6 @@ const SearchInput = () => {
                 </button>
             </form>
         </div>
-
-
     )
 }
 
