@@ -7,13 +7,13 @@ export const getSidebarUsers = async (req, res) => {
     try {
         const loggedUserId = req.user._id; // id of the logged in user
         
-        const contacts = await Contact.findOne({ userId: loggedUserId }).populate('contacts', 'profilePicture fullName -_id'); // Exclude the 'password' field from the populated contacts
+        const contacts = await Contact.findOne({ userId: loggedUserId }).populate('contacts', 'profilePicture fullName '); // Exclude the 'password' field from the populated contacts
         if (!contacts) {
-            return res.status(400).json({ message: 'No contacts found' });
+            return res.status(400).json({ error: 'No contacts found' });
         }
         res.status(200).json(contacts.contacts);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ error: error.message });
     }
 }
 

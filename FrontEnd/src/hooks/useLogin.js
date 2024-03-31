@@ -2,24 +2,23 @@ import { useState } from "react"
 import toast from "react-hot-toast"
 import { useAuthContext } from "../context/AuthContext"
 
-const useSignUp = () => {
+const useLogin = () => {
   const [loading, setLoading] = useState(false)
   const {setAuth } = useAuthContext()
-  const signUp = async ({ fullName, userName, password, confirmPassword, email }) => {
-    const succes = handleInputsErrors({ fullName, userName, password, confirmPassword })
+  const login = async ({ userName, password }) => {
+    const succes = handleInputsErrors({ userName, password})
     if (!succes) return
     setLoading(true)
     try {
-      const res = await fetch("/api/auth/signup", {
+      const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ fullName, userName, password, confirmPassword, email })
+        body: JSON.stringify({userName, password })
       })
 
       const data = await res.json()
-      console.log(data)
 
       if (data.error) {
         toast.error(data.error)
@@ -35,21 +34,15 @@ const useSignUp = () => {
     }
   }
 
-  return { signUp, loading }
+  return { login, loading }
 }
 
-export default useSignUp
+export default useLogin
 
-function handleInputsErrors({ fullName, userName, password, confirmPassword }) {
-
-  if (!fullName || !userName || !password || !confirmPassword) {
+function handleInputsErrors({userName, password }) {
+console.log(userName + " " + password)
+  if (!userName || !password ) {
     toast.error("All fields are required")
-    return false
-
-  }
-  console.log(password, confirmPassword)
-  if (password !== confirmPassword) {
-    toast.error("Passwords do not match")
     return false
   }
 

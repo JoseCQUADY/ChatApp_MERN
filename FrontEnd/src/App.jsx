@@ -4,15 +4,20 @@ import { Toaster } from 'react-hot-toast'
 import SignUp from './pages/signup/SignUp'
 import Homepage from './pages/homepage/Homepage'
 import Login from './pages/login/Login'
+import { useAuthContext } from './context/AuthContext'
+import { Navigate } from 'react-router-dom'
 
 function App() {
+
+  const {auth} = useAuthContext()
+  
   return (
     <>
       <div className='w-full h-screen flex items-center justify-center text-[#e72a2a]'>
         <Routes>
-          <Route path='/' element={<Login />} />
-          <Route path='/home' element={<Homepage />} />
-          <Route path='/signup' element={<SignUp />} />
+          <Route path='/login' element={auth ? <Navigate to = "/" /> : <Login />} />
+          <Route path='/' element={auth ? <Homepage /> : <Navigate to = "/login" /> } />
+          <Route path='/signup' element={ auth ? <Navigate to = "/" /> : <SignUp />} />
         </Routes>
         <Toaster />
       </div>

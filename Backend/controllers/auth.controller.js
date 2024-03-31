@@ -9,7 +9,7 @@ export const signup = async (req, res) => {
         const { fullName, userName, email, password, confirmPassword, profilePicture } = req.body;
 
         if (password !== confirmPassword) {
-            return res.status(400).json({ message: "Password does not match" });
+            return res.status(400).json({ message: "Password does not match"});
         } else if (password.length < 6) {
             return res.status(400).json({ message: "Password must be atleast 6 characters long" });
         }
@@ -34,13 +34,14 @@ export const signup = async (req, res) => {
         if (newUser) {
             setCookie(newUser._id, res);
             await newUser.save();
-            res.status(201).json({ message: "User registered successfully" });
+            res.status(201).json({ fullName, userName, email, profilePicture: userProfile});
         } else {
-            res.status(400).json({ message: "User registration failed" });
+            
+            res.status(400).json({ error: "User registration failed"});
         }
     }
     catch (error) {
-        res.status(400).json({ message: "User registration failed" });
+        res.status(400).json({ error: "User registration failed" });
     }
 }
 
@@ -55,13 +56,13 @@ export const login = async (req, res) => {
         const isPasswordMatch = await comparePassword(password, user?.password || '');
 
         if (!user || !isPasswordMatch) {
-            return res.status(400).json({ message: "Invalid credentials" });
+            return res.status(400).json({ error: "Invalid credentials" });
         }
 
         setCookie(user._id, res);
 
         res.status(200).json({
-            id: user._id,
+            _id: user._id,
             fullName: user.fullName,
             userName: user.userName,
             email: user.email,
@@ -72,7 +73,7 @@ export const login = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.status(400).json({ message: "User login failed" });
+        res.status(400).json({ error: "User login failed" });
     }
 }
 
@@ -81,7 +82,7 @@ export const logout = (req, res) => {
         res.clearCookie('token');
         res.status(200).json({ message: "User logged out successfully" });
     } catch (error) {
-        res.status(400).json({ message: "User logout failed" });
+        res.status(400).json({ error: "User logout failed" });
     }
 }
 

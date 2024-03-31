@@ -1,5 +1,18 @@
+import { useState } from 'react'
+import useLogin from '../../hooks/useLogin'
+import {Link} from 'react-router-dom'
+
 
 const Login = () => {
+  const [userName, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const {login,loading} = useLogin()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    login({userName, password})
+  }
+
   return (<div className="hero h-full sm:h-screen">
     <div className="hero-content flex-col lg:flex-row  sm:flex-col">
       <div className="text-center lg:text-left  max-w-screen-md">
@@ -16,24 +29,27 @@ const Login = () => {
               Login Now!
             </div>
             <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-transparent">
-              <form className="card-body">
+              <form className="card-body" onSubmit={handleSubmit}>
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text text-[#ffff] font-bold">Email</span>
+                    <span className="label-text text-[#ffff] font-bold">Username</span>
                   </label>
-                  <input type="email" placeholder="JohnDoe@gmail.com" className="input input-bordered" required />
+                  <input value = {userName} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="JohnDoe" className="input input-bordered" required />
                 </div>
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text text-[#ffff] font-bold">Password</span>
                   </label>
-                  <input type="password" placeholder="123456" className="input input-bordered" required />
+                  <input value = {password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="123456" className="input input-bordered" required />
                   <label className="label">
-                    <span className='label-text-alt link link-hover  font-semibold'>Don't have an account?</span>
+                  
+                    <Link to="/signup" className='label-text-alt link link-hover  font-semibold'>Don't have an account?</Link>
                   </label>
                 </div>
                 <div className="form-control mt-6">
-                  <button className="btn btn-secondary btn-outline">Login </button>
+                  <button disabled = {loading} className="btn btn-secondary btn-outline">
+                    {loading ? <span className="loading loading-lg"></span> : "Login"}
+                  </button>
                 </div>
               </form>
               <label className="swap swap-flip text-5xl">

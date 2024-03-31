@@ -1,4 +1,5 @@
 import React from 'react'
+import useSignUp from '../../hooks/useSignUp'
 
 
 const SignUp = () => {
@@ -11,11 +12,12 @@ const SignUp = () => {
         confirmPassword: ''
     })  
 
-    //  const [loading, signUp] = useSignUp()
+    const {loading,signUp}= useSignUp(inputs)
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        // await signUp(inputs)
+        await signUp(inputs)
         console.log(inputs)
     }
     return (
@@ -63,7 +65,9 @@ const SignUp = () => {
                                         <input value = {inputs.confirmPassword} onChange = {(e) => setInputs({... inputs, confirmPassword : e.target.value})}type="password" placeholder="123456" className="input input-bordered" required />
                                     </div>
                                     <div className="form-control mt-6">
-                                        <button className="btn btn-secondary btn-outline">Sign Up </button>
+                                        <button className="btn btn-secondary btn-outline"
+                                        disabled = {loading}
+                                        >   {loading ? <span className='loading loading-spinner'> </span> : "Sign Up"}</button>
                                     </div>
                                 </form>
                             </div>

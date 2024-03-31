@@ -1,18 +1,25 @@
+import useConversation from "../zustand/userConversation"
 
-const Contact = () => {
+const Contact = ({conversation}) => {
+
+    const {selectedConversation,setSelectedConversation}= useConversation()
+
+    const isSelected = selectedConversation?._id === conversation._id;
+
     return (
         <>
-            <div className="flex gap-2 items-center rounder cursor-pointer hover:bg-slate-500 p-2 py-1">
+            <div className={`flex gap-2 items-center rounder cursor-pointer hover:bg-sky-500 p-2 py-1
+            ${isSelected ? "bg-sky-500" : ""}
+            `} onClick={()=>setSelectedConversation(conversation)}>
                 <div className="avatar online">
 
                     <div className="rounded-full w-12">
-
-                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt="avatar" />
+                        <img src={conversation.profilePicture} alt="avatar" />
                     </div>
                 </div>
                 <div className="flex flex-col flex-1">
                     <div className=" flex gap-3 justify-between">
-                        <p>John Doe</p>
+                        <p>{conversation.fullName}</p>
                         <span>😈</span>
                     </div>
                 </div>
