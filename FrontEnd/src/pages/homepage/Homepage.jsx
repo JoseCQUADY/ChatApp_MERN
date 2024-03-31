@@ -1,7 +1,7 @@
 import React from 'react'
 import Sidebar from '../../components/Sidebar'
 import Chat from '../../components/Chat'
-import Login from '../login/Login'
+
 const Homepage = () => {
     return (
 
