@@ -7,7 +7,6 @@ export const Message = ({message}) => {
     const {selectedConversation} = useConversation();
 
     const isSender = message.senderId === auth._id;
-    console.log(isSender, message.senderId, auth._id)
     const chatClass = isSender ? "chat chat-end" : "chat chat-start";
     const profileImage = isSender ? auth.profilePicture : selectedConversation.profilePicture;
     const bubleColor = isSender ? "bg-blue-500" : "bg-gray-500";

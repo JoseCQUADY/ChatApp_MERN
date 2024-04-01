@@ -4,11 +4,10 @@ import NoChatSelected from "./NoChatSelected";
 import useConversation from "../zustand/userConversation";
 import { useEffect } from "react";
 const Chat = () => {
+
   const { selectedConversation,setSelectedConversation } = useConversation();
   
-  
   useEffect(() => {
-
     return () => {
       setSelectedConversation(null);
     };

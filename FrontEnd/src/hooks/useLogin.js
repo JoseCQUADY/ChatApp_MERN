@@ -40,7 +40,6 @@ const useLogin = () => {
 export default useLogin
 
 function handleInputsErrors({userName, password }) {
-console.log(userName + " " + password)
   if (!userName || !password ) {
     toast.error("All fields are required")
     return false

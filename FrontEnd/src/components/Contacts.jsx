@@ -1,7 +1,12 @@
 import Contact from "./Contact"
 import useGetConversation from "../hooks/useGetConversation"
+import {useListenContact} from "../hooks/useListenContact"
+
 const Contacts = () => {
   const { loading,conversations } = useGetConversation()
+
+  useListenContact()
+    
   return (
     <div className="py-0 flex flex-col overflow-auto">
       {conversations.map((conversation) => (

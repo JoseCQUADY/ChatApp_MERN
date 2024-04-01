@@ -19,7 +19,6 @@ const useSignUp = () => {
       })
 
       const data = await res.json()
-      console.log(data)
 
       if (data.error) {
         toast.error(data.error)
@@ -47,7 +46,6 @@ function handleInputsErrors({ fullName, userName, password, confirmPassword }) {
     return false
 
   }
-  console.log(password, confirmPassword)
   if (password !== confirmPassword) {
     toast.error("Passwords do not match")
     return false

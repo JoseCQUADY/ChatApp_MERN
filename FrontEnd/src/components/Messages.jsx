@@ -19,12 +19,14 @@ const Messages = () => {
 
     return (
         <div className="px-4 flex-auto overflow-auto h-full w-full ">
+            {messages.length === 0 && <p className="text-center">Send a message to start a conversation</p>}
+            
             {!loading && messages.length > 0 && messages.map((message) =>
                 <div ref={lastMessage}>
                     <Message message={message} />
                 </div>
             )}
-            {loading && messages.length === 0 && <p className="text-center">Send a message to start a conversation</p>}
+            
         </div>
     )
 }

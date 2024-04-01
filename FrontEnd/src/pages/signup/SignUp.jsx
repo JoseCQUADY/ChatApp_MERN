@@ -18,7 +18,6 @@ const SignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         await signUp(inputs)
-        console.log(inputs)
     }
     return (
         <div className="hero h-full sm:h-screen">

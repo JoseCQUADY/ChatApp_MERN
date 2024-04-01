@@ -12,8 +12,9 @@ export const SocketProvider = ({ children }) => {
 
     const [onlineUsers, setOnlineUsers] = useState([]);
 
-    const { auth } = useAuthContext();
+    
 
+    const { auth } = useAuthContext();
 
     useEffect(() => {
         if (auth) {

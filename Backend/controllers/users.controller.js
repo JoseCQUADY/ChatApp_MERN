@@ -2,6 +2,9 @@ import User from '../models/user.model.js';
 import Contact from '../models/contacts.model.js';
 import Messages from '../models/messages.model.js';
 import Conversation from '../models/conversation.model.js';
+import { getReceiverSocketId } from '../socket/socket.js';
+import { io } from '../socket/socket.js';
+
 
 export const getSidebarUsers = async (req, res) => {
     try {
@@ -13,7 +16,6 @@ export const getSidebarUsers = async (req, res) => {
         }
         res.status(200).json(contacts.contacts);
     } catch (error) {
-        console.log(error);
         res.status(500).json({ error: error.message });
     }
 }
@@ -21,6 +23,7 @@ export const getSidebarUsers = async (req, res) => {
 export const addUser = async (req, res) => {
     try {
         const { id } = req.params;  // id of the user to be added as friend
+
         const loggedUserId = req.user._id; // id of the logged in user
 
         if (!id) {
@@ -56,6 +59,12 @@ export const addUser = async (req, res) => {
 
 
         await contact.save();
+
+        const receiverSocketId = getReceiverSocketId(id);
+
+        if (receiverSocketId) {
+            io.to(receiverSocketId).emit('newContact', contact);
+        }
 
         res.status(201).json(contact);
 
@@ -107,7 +116,6 @@ export const deleteUser = async (req, res) => {
                 await Messages.findByIdAndDelete(message._id);
                 message.save();
             })
-            await Conversation.findByIdAndDelete(conversation._id);
             conversation.save();
         }
 
@@ -116,8 +124,7 @@ export const deleteUser = async (req, res) => {
         res.status(200).json("User removed from contacts");
 
     } catch (error) {
-        console.log(error); 
-        res.status(500).json({ message: error.message });
+
     }
 }
 
