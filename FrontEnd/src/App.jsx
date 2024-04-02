@@ -5,6 +5,7 @@ import SignUp from './pages/signup/SignUp'
 import Homepage from './pages/homepage/Homepage'
 import { useAuthContext } from './context/AuthContext'
 import { Navigate } from 'react-router-dom'
+import Login from './pages/login/Login'
 
 function App() {
 
