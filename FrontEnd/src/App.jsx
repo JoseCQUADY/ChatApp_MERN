@@ -5,7 +5,7 @@ import SignUp from './pages/signup/SignUp'
 import Homepage from './pages/homepage/Homepage'
 import { useAuthContext } from './context/AuthContext'
 import { Navigate } from 'react-router-dom'
-import Login from './pages/login/Login'
+import Login from './pages/login/LoginPage'
 
 function App() {
 
