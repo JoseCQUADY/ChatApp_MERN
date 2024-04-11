@@ -7,6 +7,7 @@ import usersRoutes from './routes/users.routes.js';
 import cookieParser from 'cookie-parser';
 import {app, server} from './socket/socket.js';
 import path from 'path';
+import cors from 'cors';
 
 const PORT = process.env.PORT || 3000;
 
@@ -17,6 +18,7 @@ dotenv.config({ path: './.env'});
 //Node js body parser
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors());
 
 //Routes
 app.use('/api/auth', authRoutes);
