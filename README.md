@@ -1,14 +1,13 @@
-# Pasos para correr el programa: 
+# Steps to run the program
 
-1- Clonarlo
+1- Clone it
 
-2- Tener instalado Node.js
+2- Make sure Node.js is installed
 
-3- Abrir el proyecto 
+3- Open the project
 
-4- Colocar el comando : npm install express
+4- Run the command: npm install express
 
-5- Coloar el comando : npm install 
+5- Run the command: npm install
 
-5- Correr el programa con npm run dev
-
+6- Start the program with npm run dev
